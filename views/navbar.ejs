@@ -1,0 +1,81 @@
+<link rel="stylesheet" href="/css/custom_theme.css">
+<nav class="navbar navbar-expand-lg navbar-custom">
+    <div class="container-fluid">
+        <!-- Brand + Toggle -->
+        <a class="navbar-brand" href="/"><i class="bi bi-journal-bookmark"></i> Quản lý ghi chú</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Navbar content -->
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <!-- Left-side nav links -->
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <% if(typeof session==="undefined" || !session.MaNguoiDung) { %>
+                    <!-- chưa đăng nhập -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="/dangky"><i class="bi bi-person-plus-fill"></i> Đăng ký</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/dangnhap"><i class="bi bi-box-arrow-in-right"></i> Đăng nhập</a>
+                    </li>
+                    <% } else { %>
+                        <% if(session.QuyenHan=="admin" ) { %>
+                            <!-- admin menu -->
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownAdmin" role="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="bi bi-gear"></i> Quản trị
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdownAdmin">
+                                        <hr class="dropdown-divider" />
+                                    </li>
+                                    <li><a class="dropdown-item" href="/taikhoan"><i class="bi bi-people"></i> Tài
+                                            khoản</a></li>
+                                </ul>
+                            </li>
+                            <% } %>
+                                <!-- common user links -->
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/ghichu/them"><i class="bi bi-plus-circle"></i> Tạo ghi
+                                        chú mới</a>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownProfile"
+                                        role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="bi bi-person"></i>
+                                        <%= session.HoVaTen %>
+                                    </a>
+                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownProfile">
+                                        <li><a class="dropdown-item" href="/ghichu/cuatoi"><i
+                                                    class="bi bi-journal-bookmark"></i> Ghi chú của tôi</a></li>
+                                        <li>
+                                            <hr class="dropdown-divider" />
+                                        </li>
+                                        <li><a class="dropdown-item"
+                                                href="/taikhoan/cuatoi/<%= session.MaNguoiDung %>"><i
+                                                    class="bi bi-person-badge"></i> Hồ sơ cá nhân</a></li>
+                                    </ul>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/dangxuat"><i class="bi bi-box-arrow-right"></i> Đăng
+                                        xuất</a>
+                                </li>
+                                <% } %>
+            </ul>
+
+            <% if (typeof session !== "undefined" && session.MaNguoiDung) { %>
+                <!-- Phần bên phải cùng của navbar -->
+                <div class="d-flex align-items-center">
+                    <span class="text-white me-3">🌟 Chào mừng!</span>
+                    <img src="<%= session.Avatar || '/img/default.png' %>" alt="Avatar" width="40" height="40"
+                        class="rounded-circle border border-white">
+                </div>
+            <% } %>
+        </div>
+    </div>
+</nav>
+
+<!-- Đảm bảo đã thêm thư viện JavaScript của Bootstrap 5 -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>

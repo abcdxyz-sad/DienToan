@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!--=============== REMIXICONS ===============-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.5.0/remixicon.css" crossorigin="" />
+
+  <!--=============== CSS ===============-->
+  <link rel="stylesheet" href="/css/style-register.css" />
+
+  <title>Đăng ký tài khoản</title>
+</head>
+
+<body>
+  <div class="login">
+    <img src="/img/login-bg.png" alt="image" class="login__bg" />
+
+    <!-- Form đăng ký -->
+    <form action="/dangky" method="post" enctype="multipart/form-data" class="login__form">
+      <h1 class="login__title">Đăng ký</h1>
+
+      <div class="login__inputs">
+        <div class="login__box">
+          <input type="text" name="HoVaTen" placeholder="Họ và tên" required class="login__input" />
+          <i class="ri-user-line"></i>
+        </div>
+
+        <div class="login__box">
+          <input type="email" name="Email" placeholder="Email" required class="login__input" />
+          <i class="ri-mail-line"></i>
+        </div>
+
+        <div class="login__box">
+          <input type="text" name="TenDangNhap" placeholder="Tên đăng nhập" required class="login__input" />
+          <i class="ri-user-fill"></i>
+        </div>
+
+        <div class="login__box">
+          <input type="password" name="MatKhau" placeholder="Mật khẩu" required class="login__input" />
+          <i class="ri-lock-fill"></i>
+        </div>
+
+        <div class="login__box">
+          <input type="password" name="XacNhanMatKhau" placeholder="Xác nhận mật khẩu" required class="login__input" />
+          <i class="ri-lock-password-fill"></i>
+        </div>
+      </div>
+
+      <div class="login__box">
+        <input type="file" name="Avatar" accept="image/*" class="login__input" />
+        <i class="ri-image-add-line"></i>
+      </div>
+
+      <div class="login__check">
+        <div class="login__check-box">
+          <i class="ri-shield-check-fill" style="color:rgb(0, 140, 255); font-size: 1.2rem;"></i>
+          <span style="margin-left: 5px;">Secure login</span>
+        </div>
+
+        <!-- Thêm checkbox hiện mật khẩu -->
+        <div class="login__check-box">
+          <input type="checkbox" id="togglePassword">
+          <label for="togglePassword">Hiện mật khẩu</label>
+        </div>
+      </div>
+
+      <button type="submit" class="login__button">Đăng ký</button>
+
+      <div class="login__register">
+        Đã có tài khoản? <a href="/dangnhap">Đăng nhập</a>
+      </div>
+    </form>
+  </div>
+</body>
+<%- include('javascript') %>
+
+</html>

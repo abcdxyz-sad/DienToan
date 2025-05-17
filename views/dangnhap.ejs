@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<!--=============== REMIXICONS ===============-->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.5.0/remixicon.css" crossorigin="">
+
+	<!--=============== CSS ===============-->
+	<link rel="stylesheet" href="/css/styles.css" />
+
+	<title>Đăng nhập - Quản lý ghi chú</title>
+</head>
+
+<body>
+	<div class="login">
+		<img src="/img/login-bg.png" alt="image" class="login__bg" />
+
+		<!-- Form xử lý đăng nhập -->
+		<form action="/dangnhap" method="post" class="login__form">
+			<h1 class="login__title">Đăng nhập</h1>
+
+			<div class="login__inputs">
+				<div class="login__box">
+					<input type="text" name="TenDangNhap" placeholder="Tên đăng nhập" required class="login__input">
+					<i class="ri-user-fill"></i>
+				</div>
+
+				<div class="login__box">
+					<input type="password" name="MatKhau" placeholder="Mật khẩu" required class="login__input">
+					<i class="ri-lock-2-fill"></i>
+				</div>
+			</div>
+
+			<div class="login__check">
+				<div class="login__check-box">
+					<i class="ri-shield-check-fill" style="color:rgb(0, 140, 255); font-size: 1.2rem;"></i>
+					<span style="margin-left: 5px;">Secure login</span>
+				</div>
+
+				<!-- Thêm checkbox hiện mật khẩu -->
+				<div class="login__check-box">
+					<input type="checkbox" id="togglePassword">
+					<label for="togglePassword">Hiện mật khẩu</label>
+				</div>
+			</div>
+
+			<button type="submit" class="login__button">Đăng nhập</button>
+
+			<div class="login__register">
+				Chưa có tài khoản? <a href="/dangky">Đăng ký</a>
+			</div>
+		</form>
+	</div>
+</body>
+<%- include('javascript') %>
+
+</html>

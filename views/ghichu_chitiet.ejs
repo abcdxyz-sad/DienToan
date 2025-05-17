@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" />
+    <title>
+        <%= title %> - Quản lý ghi chú
+    </title>
+</head>
+
+<body>
+    <div class="container">
+        <%- include('header') %>
+            <!-- Menu ngang -->
+            <%- include('navbar') %>
+
+                <!-- Nội dung chính -->
+                <div class="card mt-3">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <span>
+                            <%= title %>
+                        </span>
+                    </div>
+                    <div class="card-body">
+                        <!-- Thay form bằng phần hiển thị chỉ đọc -->
+                        <div class="mb-3">
+                            <label class="form-label">Tiêu đề</label>
+                            <div class="form-control" readonly style="background-color: #e9ecef;">
+                                <strong>
+                                    <%= ghichu.TieuDe %>
+                                </strong>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Nội dung ghi chú</label>
+                            <div class="border rounded p-2" style="min-height: 200px;">
+                                <%- ghichu.NoiDung %>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <a href="/ghichu" class="btn btn-secondary">
+                                <i class="bi bi-arrow-left"></i> Quay lại
+                            </a>
+                            <a href="/ghichu/sua/<%= ghichu._id %>" class="btn btn-warning">
+                                <i class="bi bi-pencil-square"></i> Sửa ghi chú
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Footer -->
+                <%- include('footer') %>
+    </div>
+
+    <%- include('javascript') %>
+</body>
+
+</html>

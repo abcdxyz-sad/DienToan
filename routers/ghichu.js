@@ -71,22 +71,17 @@ router.get('/xoa/:id', async (req, res) => {
 
 // GET: Danh sách ghi chú của tôi
 router.get('/cuatoi', async (req, res) => {
-	if(req.session.MaNguoiDung) {
-        // Mã người dùng hiện tại
-        var id = req.session.MaNguoiDung;
-        var gc = await GhiChu.find()
-            .populate({
-                path: 'TaiKhoan',
-                match: { _id: id }
-            })
-            .exec();
-        res.render('ghichu_cuatoi', {
-            title: 'Ghi chú của tôi',
-            ghichu: gc
-        });
-    } else {
-        res.redirect('/dangnhap');
-    }
+	if (req.session.MaNguoiDung) {
+		const id = req.session.MaNguoiDung;
+		const gc = await GhiChu.find({ TaiKhoan: id }).exec();
+
+		res.render('ghichu_cuatoi', {
+			title: 'Ghi chú của tôi',
+			ghichu: gc
+		});
+	} else {
+		res.redirect('/dangnhap');
+	}
 });
 
 // GET: Xem chi tiết ghi chú

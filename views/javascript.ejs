@@ -53,3 +53,35 @@
 	});
   </script>
   
+  <script src="https://cdn.ckeditor.com/4.22.1/full/ckeditor.js"></script>
+<script>
+    // Khởi tạo CKEditor
+    CKEDITOR.replace('NoiDung', {
+        customConfig: 'http://127.0.0.1:3000/js/config.js'
+    });
+
+    // Kiểm tra form và CKEditor khi submit
+    document.addEventListener('DOMContentLoaded', function () {
+        const form = document.querySelector('.needs-validation');
+
+        form.addEventListener('submit', function (event) {
+            // Lấy nội dung từ CKEditor
+            const noiDung = CKEDITOR.instances.NoiDung.getData().trim();
+
+            // Kiểm tra hợp lệ
+            if (!form.checkValidity() || noiDung === "") {
+                event.preventDefault();
+                event.stopPropagation();
+
+                // Hiển thị lỗi cho CKEditor (thủ công)
+                const textArea = document.getElementById('NoiDung');
+                textArea.classList.add('is-invalid');
+            } else {
+                // Đảm bảo textarea có dữ liệu để gửi đi
+                CKEDITOR.instances.NoiDung.updateElement();
+            }
+
+            form.classList.add('was-validated');
+        });
+    });
+</script>

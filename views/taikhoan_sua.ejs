@@ -1,23 +1,93 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 
 <head>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" />
 	<title>
 		<%= title %> - Quản lý ghi chú
 	</title>
+
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" />
+
+	<style>
+		body {
+			background-color: #121212;
+			color: #f1f1f1;
+		}
+
+		.card {
+			background-color: #1e1e1e;
+			border: none;
+			border-radius: 10px;
+			box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+		}
+
+		.card-header {
+			background-color: #2c2c2c;
+			color: #fff;
+			font-weight: bold;
+			font-size: 1.25rem;
+			border-bottom: 1px solid #444;
+		}
+
+		.form-label {
+			color: #ccc;
+		}
+
+		.form-control,
+		.form-select {
+			background-color: #2a2a2a;
+			color: #fff;
+			border: 1px solid #555;
+		}
+
+		.form-control:focus,
+		.form-select:focus {
+			background-color: #2a2a2a;
+			color: #fff;
+			border-color: #888;
+			box-shadow: none;
+		}
+
+		.form-check-label {
+			color: #ccc;
+		}
+
+		.text-muted {
+			color: #aaa !important;
+		}
+
+		.text-primary {
+			color: #9ecbff !important;
+		}
+
+		.btn-primary {
+			background-color: #0d6efd;
+			border: none;
+		}
+
+		.btn-primary:hover {
+			background-color: #0b5ed7;
+		}
+
+		.img-thumbnail {
+			background-color: #2a2a2a;
+			border: 1px solid #555;
+		}
+
+		hr {
+			border-top: 1px solid #444;
+		}
+	</style>
 </head>
 
 <body>
-	<div class="container">
+	<div class="container py-3">
 		<%- include('header') %>
-			<!-- Menu ngang -->
 			<%- include('navbar') %>
 
-				<!-- Nội dung chính -->
 				<div class="card mt-3">
 					<div class="card-header">
 						<%= title %>
@@ -25,6 +95,8 @@
 					<div class="card-body">
 						<form action="/taikhoan/sua/<%= taikhoan._id %>" method="post" enctype="multipart/form-data"
 							class="needs-validation" novalidate>
+
+							<hr />
 							<div class="mb-3">
 								<label for="HoVaTen" class="form-label">Họ và tên</label>
 								<input type="text" class="form-control" id="HoVaTen" name="HoVaTen"
@@ -37,21 +109,21 @@
 									value="<%= taikhoan.Email %>" />
 							</div>
 
+							<hr />
 							<div class="mb-3">
-								<label class="form-label" for="Avatar">Ảnh đại diện</label>
-
+								<label for="Avatar" class="form-label">Ảnh đại diện</label>
 								<% if (taikhoan.HinhAnh) { %>
 									<div class="mb-2">
-										<img src="<%= taikhoan.HinhAnh %>" alt="Avatar hiện tại" class="img-thumbnail"
-											style="height: 100px;">
+										<img src="<%= taikhoan.HinhAnh %>" alt="Avatar hiện tại"
+											class="img-thumbnail" />
 									</div>
 									<% } %>
-
 										<input type="file" class="form-control" id="Avatar" name="Avatar"
 											accept="image/*" />
-										<span class="d-block small text-muted">Chọn ảnh mới nếu muốn thay đổi.</span>
+										<small class="text-muted">Chọn ảnh mới nếu muốn thay đổi.</small>
 							</div>
 
+							<hr />
 							<div class="mb-3">
 								<label for="TenDangNhap" class="form-label">Tên đăng nhập</label>
 								<input type="text" class="form-control" id="TenDangNhap" name="TenDangNhap"
@@ -59,7 +131,7 @@
 							</div>
 
 							<div class="mb-3">
-								<label class="form-label" for="QuyenHan">Quyền hạn</label>
+								<label for="QuyenHan" class="form-label">Quyền hạn</label>
 								<select class="form-select" id="QuyenHan" name="QuyenHan" required>
 									<option value="admin" <%=taikhoan.QuyenHan=="admin" ? "selected" : "" %>>Quản trị
 										viên</option>
@@ -69,7 +141,7 @@
 							</div>
 
 							<div class="mb-3">
-								<label class="form-label" for="KichHoat">Kích hoạt</label>
+								<label class="form-label">Kích hoạt</label>
 								<div class="form-check">
 									<input class="form-check-input" type="radio" name="KichHoat" id="KichHoat1"
 										value="1" <%=taikhoan.KichHoat=="1" ? "checked" : "" %> required />
@@ -82,31 +154,42 @@
 								</div>
 							</div>
 
+							<hr />
 							<div class="mb-3">
 								<label for="MatKhau" class="form-label">Mật khẩu</label>
 								<input type="password" class="form-control" id="MatKhau" name="MatKhau" />
-								<span class="d-block small text-primary">Bỏ trống nếu muốn giữ nguyên mật khẩu
-									cũ.</span>
+								<small class="text-primary d-block">Bỏ trống nếu muốn giữ nguyên mật khẩu cũ.</small>
 							</div>
 
 							<div class="mb-3">
 								<label for="XacNhanMatKhau" class="form-label">Xác nhận mật khẩu</label>
 								<input type="password" class="form-control" id="XacNhanMatKhau" name="XacNhanMatKhau" />
-								<span class="d-block small text-primary">Bỏ trống nếu muốn giữ nguyên mật khẩu
-									cũ.</span>
+								<small class="text-primary d-block">Bỏ trống nếu muốn giữ nguyên mật khẩu cũ.</small>
 							</div>
 
-							<button type="submit" class="btn btn-primary"><i class="bi bi-cloud-arrow-up"></i> Cập nhật
-								tài khoản</button>
+							<hr />
+							<button type="submit" class="btn btn-primary">
+								<i class="bi bi-cloud-arrow-up"></i> Cập nhật tài khoản
+							</button>
 						</form>
 					</div>
 				</div>
 
-				<!-- Footer -->
 				<%- include('footer') %>
 	</div>
 
 	<%- include('javascript') %>
+
+		<script>
+			document.querySelector("form").addEventListener("submit", function (e) {
+				const mk = document.getElementById("MatKhau").value;
+				const xnm = document.getElementById("XacNhanMatKhau").value;
+				if (mk && mk !== xnm) {
+					alert("Mật khẩu xác nhận không khớp!");
+					e.preventDefault();
+				}
+			});
+		</script>
 </body>
 
 </html>

@@ -1,0 +1,332 @@
+/* Light Theme Variables */
+[data-theme="light"] {
+  --neon-green: #00a651;
+  --neon-aqua: #0099cc;
+  --neon-pink: #e6007e;
+  --neon-yellow: #e6b800;
+  --neon-red: #cc0033;
+  --neon-purple: #7b00cc;
+  --dark-bg: #acc7e3;
+  --darker-bg: #e9ecef;
+  --card-bg: #ffffff;
+  --text-light: #343a40;
+  --text-muted: #6c757d;
+  --shadow-color: rgba(0, 0, 0, 0.15);
+}
+
+/* Light Theme Body */
+[data-theme="light"] body {
+  background-color: var(--dark-bg);
+  color: var(--text-light);
+}
+
+/* Light Theme Header */
+[data-theme="light"] .header {
+  background: linear-gradient(90deg, var(--darker-bg), var(--card-bg));
+  border-bottom: 2px solid var(--neon-green);
+  box-shadow: 0 0 20px var(--shadow-color);
+}
+
+[data-theme="light"] .header-title {
+  color: var(--neon-aqua);
+  text-shadow: 0 0 5px rgba(0, 153, 204, 0.3);
+}
+
+/* Light Theme Container */
+[data-theme="light"] .list-container {
+  background-color: var(--card-bg);
+  border: 1px solid var(--neon-green);
+  box-shadow: 0 0 15px var(--shadow-color);
+}
+
+[data-theme="light"] .list-container:hover {
+  box-shadow: 0 5px 25px rgba(0, 166, 81, 0.25);
+}
+
+/* Light Theme Table */
+[data-theme="light"] .table {
+  color: var(--text-light);
+  border-color: var(--neon-green) !important;
+}
+
+[data-theme="light"] .table thead {
+  border-bottom: 2px solid var(--neon-green);
+}
+
+[data-theme="light"] .table th {
+  color: var(--neon-green) !important;
+  background-color: rgba(0, 166, 81, 0.1) !important;
+  font-weight: 600;
+}
+
+[data-theme="light"] .table td {
+  border-bottom: 1px solid rgba(0, 166, 81, 0.2) !important;
+  color: var(--text-light) !important;
+  background-color: var(--card-bg) !important;
+}
+
+[data-theme="light"] .table tr:hover td {
+  background-color: rgba(0, 166, 81, 0.05) !important;
+  color: var(--neon-aqua) !important;
+}
+
+/* Light Theme Form */
+[data-theme="light"] .form-container {
+  background-color: var(--card-bg);
+  border: 1px solid var(--neon-green);
+  box-shadow: 0 0 15px var(--shadow-color);
+}
+
+[data-theme="light"] .form-title {
+  color: var(--neon-aqua);
+  text-shadow: 0 0 2px rgba(0, 153, 204, 0.3);
+}
+
+[data-theme="light"] .form-label {
+  color: var(--neon-green) !important;
+  font-weight: 500;
+}
+
+[data-theme="light"] .form-control,
+[data-theme="light"] .form-select {
+  background-color: rgba(255, 255, 255, 0.8) !important;
+  color: var(--text-light) !important;
+  border: 1px solid var(--neon-green) !important;
+}
+
+[data-theme="light"] .form-control:focus,
+[data-theme="light"] .form-select:focus {
+  box-shadow: 0 0 0 0.25rem rgba(0, 153, 204, 0.25);
+  border-color: var(--neon-aqua) !important;
+  background-color: #ffffff !important;
+}
+
+/* Light Theme Button */
+[data-theme="light"] .btn-primary,
+.btnComplete {
+  background-color: var(--neon-green) !important;
+  box-shadow: 0 0 5px rgba(0, 166, 81, 0.5);
+  color: white !important;
+}
+
+[data-theme="light"] .btn-primary:hover,
+.btnComplete:hover {
+  background-color: var(--neon-aqua) !important;
+  box-shadow: 0 0 20px rgba(0, 153, 204, 0.5);
+}
+
+[data-theme="light"] .btn-warning {
+  background-color: var(--neon-yellow) !important;
+  box-shadow: 0 0 5px rgba(230, 184, 0, 0.5);
+  color: white !important;
+}
+
+[data-theme="light"] .btn-danger {
+  background-color: var(--neon-red) !important;
+  box-shadow: 0 0 5px rgba(204, 0, 51, 0.5);
+  color: white !important;
+}
+
+[data-theme="light"] .btn-outline {
+  background-color: transparent !important;
+  color: var(--neon-green) !important;
+  border: 1px solid var(--neon-green) !important;
+}
+
+[data-theme="light"] .btn-outline:hover {
+  background-color: var(--neon-green) !important;
+  color: white !important;
+}
+
+/* Light Theme Navbar */
+[data-theme="light"] .navbar {
+  background-color: rgba(255, 255, 255, 0.9) !important;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid var(--neon-green);
+}
+
+[data-theme="light"] .navbar-brand {
+  color: var(--neon-aqua) !important;
+  text-shadow: 0 0 2px rgba(0, 153, 204, 0.3);
+}
+
+[data-theme="light"] .nav-link {
+  color: var(--text-light) !important;
+}
+
+[data-theme="light"] .nav-link.active {
+  color: var(--neon-green) !important;
+}
+
+/* Light Theme Product Cards */
+[data-theme="light"] .product-card {
+  background-color: var(--card-bg);
+  border: 1px solid var(--neon-green);
+}
+
+[data-theme="light"] .product-card:hover {
+  box-shadow: 0 5px 20px rgba(123, 0, 204, 0.3);
+  border-color: var(--neon-purple);
+}
+
+[data-theme="light"] .product-img-container {
+  background: rgba(0, 0, 0, 0.02);
+}
+
+[data-theme="light"] .product-title {
+  color: var(--neon-aqua) !important;
+  text-shadow: 0 0 2px rgba(0, 153, 204, 0.3);
+}
+
+[data-theme="light"] .product-specs p {
+  color: var(--text-light) !important;
+}
+
+[data-theme="light"] .product-specs strong {
+  color: var(--neon-purple) !important;
+  text-shadow: 0 0 1px rgba(123, 0, 204, 0.3);
+}
+
+[data-theme="light"] .product-price {
+  color: var(--neon-aqua);
+  text-shadow: 0 0 2px rgba(0, 153, 204, 0.3);
+}
+
+/* Light Theme Buttons */
+[data-theme="light"] .btnMuaHang,
+[data-theme="light"] .btnSanPhamAll {
+  background-color: var(--neon-green);
+  color: white;
+}
+
+[data-theme="light"] .btnMuaHang:hover,
+[data-theme="light"] .btnSanPhamAll:hover {
+  background-color: var(--neon-yellow) !important;
+  border-color: var(--neon-yellow) !important;
+}
+
+/* Light Theme Alert Empty */
+[data-theme="light"] .alert-empty {
+  background-color: rgba(0, 166, 81, 0.1) !important;
+  border: 1px solid var(--neon-green);
+}
+
+[data-theme="light"] .alert-empty i {
+  color: var(--neon-red);
+}
+
+[data-theme="light"] .alert-empty h4 {
+  color: var(--neon-red) !important;
+}
+
+/* Light Theme Text Colors */
+[data-theme="light"] .text-aqua {
+  color: var(--neon-aqua) !important;
+  text-shadow: 0 0 3px rgba(0, 153, 204, 0.3);
+}
+
+/* Light Theme Loading Spinner */
+[data-theme="light"] .spinner {
+  border: 4px solid rgba(0, 166, 81, 0.1);
+  border-top: 4px solid var(--neon-green);
+}
+
+/* Light Theme Slider */
+[data-theme="light"] .slider {
+  background-color: #ccc;
+}
+
+[data-theme="light"] input:checked + .slider {
+  background-color: var(--neon-green);
+}
+
+/* Light Theme User Profile */
+[data-theme="light"] .user-avatar {
+  border: 2px solid var(--neon-green);
+}
+
+[data-theme="light"] .username {
+  color: var(--neon-aqua);
+}
+
+/* Footer Styles - Dark Theme */
+.footer {
+  background-color: var(--darker-bg);
+  border-top: 1px solid var(--neon-green);
+  color: var(--text-light);
+}
+
+.footer-title {
+  color: var(--neon-aqua);
+  font-weight: 600;
+  text-shadow: 0 0 5px var(--neon-aqua);
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid rgba(57, 255, 20, 0.3);
+}
+
+.footer-text {
+  color: var(--text-light);
+}
+
+.brand-name {
+  color: var(--neon-green);
+  font-weight: 600;
+  text-shadow: 0 0 3px var(--neon-green);
+}
+
+.social-icon {
+  color: var(--neon-aqua);
+  margin-right: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.social-icon:hover {
+  color: var(--neon-green);
+  transform: translateY(-3px);
+  text-shadow: 0 0 8px var(--neon-green);
+}
+
+.footer .border-top {
+  border-top-color: rgba(57, 255, 20, 0.3) !important;
+}
+
+/* Light Theme Footer */
+[data-theme="light"] .footer {
+  background-color: var(--darker-bg) !important;
+  border-top: 1px solid var(--neon-green) !important;
+  color: var(--text-light) !important;
+}
+
+[data-theme="light"] .footer-title {
+  color: var(--neon-aqua) !important;
+  font-weight: 600;
+  text-shadow: 0 0 2px rgba(0, 153, 204, 0.3);
+  border-bottom: 1px solid rgba(0, 166, 81, 0.3);
+}
+
+[data-theme="light"] .footer-text {
+  color: var(--text-light) !important;
+}
+
+[data-theme="light"] .brand-name {
+  color: var(--neon-green) !important;
+  font-weight: 600;
+  text-shadow: 0 0 2px rgba(0, 166, 81, 0.3);
+}
+
+[data-theme="light"] .social-icon {
+  color: var(--neon-aqua) !important;
+  transition: all 0.3s ease;
+}
+
+[data-theme="light"] .social-icon:hover {
+  color: var(--neon-green) !important;
+  transform: translateY(-3px);
+  text-shadow: 0 0 4px rgba(0, 166, 81, 0.5);
+}
+
+[data-theme="light"] .footer .border-top {
+  border-top-color: rgba(0, 166, 81, 0.3) !important;
+}

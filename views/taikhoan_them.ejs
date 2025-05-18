@@ -9,72 +9,110 @@
 	<title>
 		<%= title %> - Quản lý ghi chú
 	</title>
+	<style>
+		body {
+			background-color: #121212;
+			color: #ffffff;
+		}
+
+		.card {
+			background-color: #1e1e1e;
+			border: none;
+		}
+
+		.form-control,
+		.form-select {
+			background-color: #2a2a2a;
+			color: #ffffff;
+			border: 1px solid #444;
+		}
+
+		.form-control:focus,
+		.form-select:focus {
+			background-color: #2a2a2a;
+			color: #ffffff;
+			border-color: #0d6efd;
+		}
+
+		.form-label {
+			color: #cccccc;
+		}
+
+		.alert a {
+			color: #ffffff;
+			text-decoration: underline;
+		}
+	</style>
 </head>
 
 <body>
 	<div class="container">
 		<%- include('header') %>
-		<!-- Menu ngang -->
-		<%- include('navbar') %>
+			<!-- Menu ngang -->
+			<%- include('navbar') %>
 
-			<!-- Nội dung chính -->
-			<div class="card mt-3">
-				<div class="card-header">
-					<%= title %>
+				<!-- Main content -->
+				<div class="card mt-3">
+					<div class="card-header">
+						<h5 class="mb-0">Thêm tài khoản</h5>
+					</div>
+					<div class="card-body">
+						<form action="/taikhoan/them" method="post" class="needs-validation" novalidate>
+							<div class="mb-3">
+								<label for="HoVaTen" class="form-label">Họ và tên</label>
+								<input type="text" class="form-control" id="HoVaTen" name="HoVaTen" required />
+							</div>
+
+							<div class="mb-3">
+								<label for="Email" class="form-label">Email</label>
+								<input type="email" class="form-control" id="Email" name="Email" />
+							</div>
+
+							<div class="mb-3">
+								<label for="HinhAnh" class="form-label">Hình ảnh</label>
+								<input type="text" class="form-control" id="HinhAnh" name="HinhAnh"
+									placeholder="Tập tin ảnh đại diện" />
+							</div>
+
+							<div class="mb-3">
+								<label for="TenDangNhap" class="form-label">Tên đăng nhập</label>
+								<input type="text" class="form-control" id="TenDangNhap" name="TenDangNhap" required />
+							</div>
+
+							<div class="mb-3">
+								<label for="MatKhau" class="form-label">Mật khẩu</label>
+								<input type="password" class="form-control" id="MatKhau" name="MatKhau" required />
+							</div>
+
+							<div class="mb-3">
+								<label for="XacNhanMatKhau" class="form-label">Xác nhận mật khẩu</label>
+								<input type="password" class="form-control" id="XacNhanMatKhau" name="XacNhanMatKhau"
+									required />
+							</div>
+
+							<div class="mb-3">
+								<label for="QuyenHan" class="form-label">Quyền hạn</label>
+								<select class="form-select" id="QuyenHan" name="QuyenHan" required>
+									<option value="">Chọn quyền hạn</option>
+									<option value="admin">Quản trị viên</option>
+									<option value="Khách hàng">Khách hàng</option>
+								</select>
+							</div>
+
+							<button type="submit" class="btn btn-primary">
+								<i class="bi bi-cloud-arrow-up"></i> Thêm tài khoản
+							</button>
+						</form>
+					</div>
 				</div>
-				<div class="card-body">
-					<form action="/taikhoan/them" method="post" class="needs-validation" novalidate>
-						<div class="mb-3">
-							<label for="HoVaTen" class="form-label">Họ và tên</label>
-							<input type="text" class="form-control" id="HoVaTen" name="HoVaTen" required />
-						</div>
 
-						<div class="mb-3">
-							<label for="Email" class="form-label">Email</label>
-							<input type="email" class="form-control" id="Email" name="Email" />
-						</div>
+				<!-- Footer -->
+				<%- include('footer') %>
+	</div <!-- Footer -->
+	<%- include('footer') %>
+		</div>
 
-						<div class="mb-3">
-							<label for="HinhAnh" class="form-label">Hình ảnh</label>
-							<input type="text" class="form-control" id="HinhAnh" name="HinhAnh"
-								placeholder="Tập tin ảnh đại diện" />
-						</div>
-
-						<div class="mb-3">
-							<label for="TenDangNhap" class="form-label">Tên đăng nhập</label>
-							<input type="text" class="form-control" id="TenDangNhap" name="TenDangNhap" required />
-						</div>
-
-						<div class="mb-3">
-							<label for="MatKhau" class="form-label">Mật khẩu</label>
-							<input type="password" class="form-control" id="MatKhau" name="MatKhau" required />
-						</div>
-
-						<div class="mb-3">
-							<label for="XacNhanMatKhau" class="form-label">Xác nhận mật khẩu</label>
-							<input type="password" class="form-control" id="XacNhanMatKhau" name="XacNhanMatKhau"
-								required />
-						</div>
-
-						<div class="mb-3">
-							<label for="QuyenHan" class="form-label">Quyền hạn</label>
-							<select class="form-select" id="QuyenHan" name="QuyenHan" required>
-								<option value="">Chọn quyền hạn</option>
-								<option value="admin">Quản trị viên</option>
-								<option value="Khách hàng">Khách hàng</option>
-							</select>
-						</div>
-						<button type="submit" class="btn btn-primary"><i class="bi bi-cloud-arrow-up"></i> Thêm tài
-							khoản</button>
-					</form>
-				</div>
-			</div>
-
-			<!-- Footer -->
-			<%- include('footer') %>
-	</div>
-
-	<%- include('javascript') %>
+		<%- include('javascript') %>
 </body>
 
 </html>

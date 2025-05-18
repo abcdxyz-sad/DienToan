@@ -70,8 +70,10 @@
                             <%= bv.TieuDe %>
                           </h5>
                           <p class="card-text text-warning small">
-                            🕒 Giờ thêm ghi chú: <%= new Date(bv.NgayDang?.toISOString?.()).toLocaleString("vi-VN") %>
+                            🕒 Giờ thêm ghi chú:
+                            <%= new Date(bv.NgayDang).toLocaleString("vi-VN", { timeZone: "Asia/Ho_Chi_Minh" }) %>
                           </p>
+
 
                           <div class="mt-auto d-grid gap-2">
                             <a href="/ghichu/chitiet/<%= bv._id %>" class="btn btn-neon btn-sm">

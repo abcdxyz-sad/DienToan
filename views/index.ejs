@@ -12,7 +12,7 @@
 
   <style>
     body {
-      background-color: black;
+      background-color: #1e1e1e;
       color: #0ff;
     }
 
@@ -70,8 +70,9 @@
                             <%= bv.TieuDe %>
                           </h5>
                           <p class="card-text text-warning small">
-                            🕒 <%= new Date(bv.NgayDang?.toISOString?.()).toLocaleString("vi-VN") %>
+                            🕒 Giờ thêm ghi chú: <%= new Date(bv.NgayDang?.toISOString?.()).toLocaleString("vi-VN") %>
                           </p>
+
                           <div class="mt-auto d-grid gap-2">
                             <a href="/ghichu/chitiet/<%= bv._id %>" class="btn btn-neon btn-sm">
                               <i class="bi bi-eye"></i> Xem chi tiết

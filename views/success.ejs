@@ -9,30 +9,63 @@
     <title>
         <%= title %> - Quản lý ghi chú
     </title>
+    <style>
+        body {
+            background-color: #1c1e21;
+            /* Nền tối */
+            color: #f8f9fa;
+            /* Chữ sáng */
+        }
+
+        .card {
+            background-color: #1c1e21;
+            border: none;
+        }
+
+        .card-header {
+            background-color: #2a2d31;
+            color: #198754;
+            font-weight: bold;
+        }
+
+        .alert-success {
+            background-color: #198754;
+            color: #fff !important;
+        }
+
+        #message {
+            color: #fff !important;
+        }
+    </style>
 </head>
 
 <body>
     <div class="container">
         <%- include('header') %>
-        <!-- Menu ngang -->
-        <%- include('navbar') %>
+            <!-- Menu ngang -->
+            <%- include('navbar') %>
 
-            <!-- Nội dung chính -->
-            <div class="card mt-3">
-                <div class="card-header">
-                    <%= title %>
-                </div>
-                <div class="card-body">
-                    <% if(typeof message !=="undefined" && message) { %>
-                        <div class="alert alert-success mb-0" role="alert">
-                            <%- message %>
-                        </div>
-                        <% } %>
-                </div>
-            </div>
+                <!-- Nội dung chính -->
+                <div class="card mt-3">
+                    <div class="card-header">
+                        <%= title %>
+                    </div>
+                    <div class="card-body">
+                        <% if (typeof message !=="undefined" && message) { %>
+                            <div class="alert alert-success d-flex align-items-center px-4 py-3 rounded-3 border-0"
+                                role="alert" style="background-color: #ffffff; color: #198754;">
+                                <i class="bi bi-check-circle-fill me-2 fs-5" style = "color: #198754;" ></i>
+                                <div class="fw-semibold text-white">
+                                    <%- message %>
+                                </div>
+                            </div>
+                            <% } %>
 
-            <!-- Footer -->
-            <%- include('footer') %>
+                    </div>
+                </div>
+
+                <!-- Footer -->
+                <%- include('footer') %>
     </div>
 
     <%- include('javascript') %>

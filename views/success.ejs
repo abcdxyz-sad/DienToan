@@ -23,8 +23,9 @@
         }
 
         .card-header {
-            background-color: #2a2d31;
-            color: #198754;
+            border-bottom: 1px solid rgb(0, 255, 255);
+            background: #12121293;
+            color: #17b945;
             font-weight: bold;
         }
 
@@ -48,13 +49,15 @@
                 <!-- Nội dung chính -->
                 <div class="card mt-3">
                     <div class="card-header">
-                        <%= title %>
+                        <h3>
+                            <%= title %>
+                        </h3>
                     </div>
                     <div class="card-body">
                         <% if (typeof message !=="undefined" && message) { %>
                             <div class="alert alert-success d-flex align-items-center px-4 py-3 rounded-3 border-0"
                                 role="alert" style="background-color: #ffffff; color: #198754;">
-                                <i class="bi bi-check-circle-fill me-2 fs-5" style = "color: #198754;" ></i>
+                                <i class="bi bi-check-circle-fill me-2 fs-5" style="color: #198754;"></i>
                                 <div class="fw-semibold text-white">
                                     <%- message %>
                                 </div>

@@ -27,11 +27,6 @@
             min-height: 100vh;
         }
 
-        .container {
-            padding-top: 1rem;
-            padding-bottom: 2rem;
-        }
-
         .card {
             background-color: var(--card-bg);
             border: none;
@@ -41,11 +36,9 @@
         }
 
         .card-header {
-            background-color: rgba(0, 0, 0, 0.2);
-            border-bottom: 1px solid #333;
-            font-weight: 600;
-            padding: 0.75rem 1.25rem;
-            color: var(--text-primary);
+            border-bottom: 1px solid rgb(0, 255, 255);
+            background: #12121293;
+            color: white;
         }
 
         .note-title {
@@ -96,6 +89,11 @@
             text-align: left;
         }
 
+        h3 .card-title {
+            color: white;
+        }
+
+
         .table-hover tbody tr:hover {
             background-color: rgba(255, 255, 255, 0.08);
         }
@@ -134,7 +132,9 @@
                 <!-- Main content -->
                 <div class="card mt-3">
                     <div class="card-header">
-                        <%= title %>
+                        <h3>
+                            <%= title %>
+                        </h3>
                     </div>
                     <div class="card-body p-0">
                         <div class="table-responsive">

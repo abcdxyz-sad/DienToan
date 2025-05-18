@@ -41,6 +41,7 @@
 		.table {
 			border-collapse: collapse;
 			color: #fff;
+			border: 3px solid #6c5ce7;
 		}
 
 		.table thead th {
@@ -90,17 +91,25 @@
 			background-color: #7e6ef7;
 			border-color: #7e6ef7;
 		}
+
+		.card-header {
+			border-bottom: 1px solid rgb(0, 255, 255);
+			background: #12121293;
+			color: white;
+		}
 	</style>
 </head>
 
 <body>
-	<div class="container py-3">
+	<div class="container">
 		<%- include('header') %>
 			<%- include('navbar') %>
 
 				<div class="card mt-3">
 					<div class="card-header">
-						<%= title %>
+						<h3>
+							<%= title %>
+						</h3>
 					</div>
 					<div class="card-body table-responsive">
 						<a href="/taikhoan/them" class="btn btn-primary mb-3">

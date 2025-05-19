@@ -25,18 +25,36 @@ router.get("/them", async (req, res) => {
 
 // POST: Thêm tài khoản
 router.post("/them", upload.single("Avatar"), async (req, res) => {
-	const salt = bcrypt.genSaltSync(10);
-	const data = {
-		HoVaTen: req.body.HoVaTen,
-		Email: req.body.Email,
-		HinhAnh: req.file ? "/uploads/avatar/" + req.file.filename : null,
-		TenDangNhap: req.body.TenDangNhap,
-		MatKhau: bcrypt.hashSync(req.body.MatKhau, salt),
-		QuyenHan: req.body.QuyenHan || "user",
-	};
-	await TaiKhoan.create(data);
-	res.redirect("/taikhoan");
+	try {
+		const tonTai = await TaiKhoan.findOne({
+			$or: [
+				{ TenDangNhap: req.body.TenDangNhap },
+				{ Email: req.body.Email },
+			],
+		});
+		if (tonTai) {
+			req.session.error = "Tên đăng nhập hoặc email đã tồn tại.";
+			return res.redirect("/error");
+		}
+
+		const salt = bcrypt.genSaltSync(10);
+		const data = {
+			HoVaTen: req.body.HoVaTen,
+			Email: req.body.Email,
+			HinhAnh: req.file ? "/uploads/avatar/" + req.file.filename : null,
+			TenDangNhap: req.body.TenDangNhap,
+			MatKhau: bcrypt.hashSync(req.body.MatKhau, salt),
+			QuyenHan: req.body.QuyenHan || "user",
+		};
+		await TaiKhoan.create(data);
+		res.redirect("/taikhoan");
+	} catch (err) {
+		console.error("Lỗi khi thêm tài khoản:", err);
+		req.session.error = "Lỗi khi thêm tài khoản: " + err.message;
+		res.redirect("/error");
+	}
 });
+
 
 // GET: Tài khoản của tôi
 router.get("/cuatoi/:id", async (req, res) => {
@@ -97,6 +115,12 @@ router.post("/sua/:id", upload.single("Avatar"), async (req, res) => {
 router.get("/xoa/:id", async (req, res) => {
 	const id = req.params.id;
 	try {
+		// Không cho phép admin đang đăng nhập tự xóa chính mình
+		if (req.session && req.session.MaNguoiDung === id && req.session.QuyenHan === "admin") {
+			req.session.error = "Bạn đang đăng nhập tài khoản này, không thể xóa";
+			return res.redirect("/error");
+		}
+
 		const tk = await TaiKhoan.findById(id);
 		if (tk && tk.HinhAnh) {
 			const avatarPath = path.join(__dirname, "..", "public", tk.HinhAnh);
@@ -109,9 +133,11 @@ router.get("/xoa/:id", async (req, res) => {
 		res.redirect("/taikhoan");
 	} catch (err) {
 		console.error("Lỗi khi xóa tài khoản:", err);
-		res.status(500).send("Lỗi khi xóa tài khoản.");
+		req.session.error = "Lỗi khi xóa tài khoản: " + err.message;
+		res.redirect("/error");
 	}
 });
+
 
 // POST: Upload avatar riêng
 router.post("/avatar", upload.single("avatar"), async (req, res) => {

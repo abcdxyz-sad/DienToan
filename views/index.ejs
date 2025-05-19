@@ -104,7 +104,11 @@
               <% } else { %>
                 <div class="text-center p-4 text-info">
                   <i class="bi bi-exclamation-circle" style="font-size: 2rem;"></i>
-                  <p>Vui lòng đăng nhập để xem ghi chú</p>
+                  <% if (session && session.MaNguoiDung) { %>
+                    <p>Chưa có ghi chú nào. Hãy thêm vào ghi chú!</p>
+                    <% } else { %>
+                      <p>Vui lòng đăng nhập để xem ghi chú</p>
+                      <% } %>
                 </div>
                 <% } %>
           </div>

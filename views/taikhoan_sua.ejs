@@ -25,11 +25,9 @@
 		}
 
 		.card-header {
-			background-color: #2c2c2c;
-			color: #fff;
-			font-weight: bold;
-			font-size: 1.25rem;
-			border-bottom: 1px solid #444;
+			border-bottom: 1px solid rgb(0, 255, 255);
+			background: #12121293;
+			color: white;
 		}
 
 		.form-label {
@@ -90,7 +88,9 @@
 
 				<div class="card mt-3">
 					<div class="card-header">
-						<%= title %>
+						<h3>
+							<%= title %>
+						</h3>
 					</div>
 					<div class="card-body">
 						<form action="/taikhoan/sua/<%= taikhoan._id %>" method="post" enctype="multipart/form-data"

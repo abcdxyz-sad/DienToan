@@ -69,11 +69,12 @@
             background-color: var(--card-bg);
             border-collapse: collapse;
             width: 100%;
+            border: 5px solid #646464;
         }
 
         .table thead th {
-            background-color: #333;
-            color: #fff;
+            background-color: rgb(0, 174, 255);
+            color: #000000;
             border: 1px solid #444;
             padding: 12px;
             text-align: center;
@@ -83,6 +84,7 @@
             border: 1px solid #444;
             padding: 10px;
             text-align: center;
+            align-items: center;
         }
 
         .table tbody td.note-title {
@@ -136,13 +138,13 @@
                             <%= title %>
                         </h3>
                     </div>
-                    <div class="card-body p-0">
+                    <div class="card-body">
                         <div class="table-responsive">
                             <table class="table table-hover mb-0">
                                 <thead>
                                     <tr>
                                         <th width="10%">STT</th>
-                                        <th width="45%">Tiêu đề</th>
+                                        <th width="40%">Tiêu đề</th>
                                         <th width="20%">Ngày đăng</th>
                                         <th width="10%">Xem</th>
                                         <th width="10%">Xóa</th>

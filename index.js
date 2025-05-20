@@ -56,5 +56,5 @@ app.use(express.static('Custom_Style'));
 app.use(express.static('public'));
 
 app.listen(3000, () => {
-    console.log('Server is running at https://dientoan-mz3w.onrender.com');
+    console.log('Server is running at http://127.0.0.1:3000');
 });

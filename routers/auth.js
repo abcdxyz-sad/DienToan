@@ -7,7 +7,8 @@ const upload = require('../middlewares/uploadAvatar');
 // GET: Đăng ký
 router.get('/dangky', async (req, res) => {
     res.render('dangky', {
-        title: 'Đăng ký tài khoản'
+        title: 'Đăng ký tài khoản',
+        pageType: 'dangky'
     });
 });
 
@@ -30,7 +31,8 @@ router.post('/dangky', upload.single('Avatar'), async (req, res) => {
 // GET: Đăng nhập
 router.get('/dangnhap', async (req, res) => {
     res.render('dangnhap', {
-        title: 'Đăng nhập'
+        title: 'Đăng nhập',
+        pageType: 'dangnhap'
     });
 });
 

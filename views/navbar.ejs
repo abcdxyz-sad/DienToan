@@ -3,6 +3,27 @@
     <style>
         nav.navbar-custom {
             border-radius: 0 0 8px 8px;
+            background: #363636;
+            background: linear-gradient(90deg, rgba(54, 54, 54, 1) 0%, rgba(26, 54, 71, 1) 20%);
+        }
+
+        .btn-guide {
+            background-color: transparent;
+            color: #ffffff;
+            font-weight: bold;
+            border: none;
+            transition: all 0.3s ease;
+            position: relative;
+            text-decoration: none;
+        }
+
+        /* Hover hiệu ứng nhẹ nhưng không đổi nền */
+        .btn-guide:hover {
+            color: #ffffff;
+            text-shadow:
+                0 0 4px rgba(255, 255, 255, 0.8),
+                0 0 8px rgba(255, 255, 255, 0.6),
+                0 0 12px rgba(255, 255, 255, 0.4);
         }
     </style>
 
@@ -82,8 +103,12 @@
                             <a class="nav-link" href="/dangxuat"><i class="bi bi-box-arrow-right"></i> Đăng
                                 xuất</a>
                         </li>
+                        </ul>
+                        <button class="btn-guide me-3" onclick="startTutorial()" id="tutorialButton">
+                            <i class="bi bi-info-circle"></i>
+                        </button>
                         <% } %>
-                            </ul>
+
                 </div>
     </div>
 </nav>

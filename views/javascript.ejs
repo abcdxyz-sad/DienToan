@@ -1,20 +1,20 @@
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
+<script src="https://unpkg.com/intro.js/minified/intro.min.js"></script>
 <script>
-	(function () {
-		'use strict';
-		const forms = document.querySelectorAll('.needs-validation');
-		Array.from(forms).forEach(form => {
-			form.addEventListener('submit', event => {
-				if (!form.checkValidity()) {
-					event.preventDefault();
-					event.stopPropagation();
-				}
-				form.classList.add('was-validated');
-			}, false);
-		});
-	})();
+  (function () {
+    'use strict';
+    const forms = document.querySelectorAll('.needs-validation');
+    Array.from(forms).forEach(form => {
+      form.addEventListener('submit', event => {
+        if (!form.checkValidity()) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+        form.classList.add('was-validated');
+      }, false);
+    });
+  })();
 </script>
 
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
@@ -22,66 +22,377 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 <script>
-	(function () {
-		'use strict';
-		const forms = document.querySelectorAll('.needs-validation');
-		Array.from(forms).forEach(form => {
-			form.addEventListener('submit', event => {
-				if (!form.checkValidity()) {
-					event.preventDefault();
-					event.stopPropagation();
-				}
-				form.classList.add('was-validated');
-			}, false);
-		});
-	})();
+  (function () {
+    'use strict';
+    const forms = document.querySelectorAll('.needs-validation');
+    Array.from(forms).forEach(form => {
+      form.addEventListener('submit', event => {
+        if (!form.checkValidity()) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+        form.classList.add('was-validated');
+      }, false);
+    });
+  })();
 </script>
 
 <script>
-	document.addEventListener('DOMContentLoaded', function () {
-	  const toggleCheckbox = document.getElementById('togglePassword');
-	  if (toggleCheckbox) {
-		toggleCheckbox.addEventListener('change', function () {
-		  const passwordInput = document.querySelector('input[name="MatKhau"]');
-		  const confirmPasswordInput = document.querySelector('input[name="XacNhanMatKhau"]');
-  
-		  const type = this.checked ? 'text' : 'password';
-		  if (passwordInput) passwordInput.type = type;
-		  if (confirmPasswordInput) confirmPasswordInput.type = type;
-		});
-	  }
-	});
-  </script>
-  
-  <script src="https://cdn.ckeditor.com/4.22.1/full/ckeditor.js"></script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const toggleCheckbox = document.getElementById('togglePassword');
+    if (toggleCheckbox) {
+      toggleCheckbox.addEventListener('change', function () {
+        const passwordInput = document.querySelector('input[name="MatKhau"]');
+        const confirmPasswordInput = document.querySelector('input[name="XacNhanMatKhau"]');
+
+        const type = this.checked ? 'text' : 'password';
+        if (passwordInput) passwordInput.type = type;
+        if (confirmPasswordInput) confirmPasswordInput.type = type;
+      });
+    }
+  });
+</script>
+
+<script src="https://cdn.ckeditor.com/4.22.1/full/ckeditor.js"></script>
 <script>
-    // Khởi tạo CKEditor
-    CKEDITOR.replace('NoiDung', {
-        customConfig: 'http://127.0.0.1:3000/js/config.js'
+  // Khởi tạo CKEditor
+  CKEDITOR.replace('NoiDung', {
+    customConfig: 'http://127.0.0.1:3000/js/config.js'
+  });
+
+  // Kiểm tra form và CKEditor khi submit
+  document.addEventListener('DOMContentLoaded', function () {
+    const form = document.querySelector('.needs-validation');
+
+    form.addEventListener('submit', function (event) {
+      // Lấy nội dung từ CKEditor
+      const noiDung = CKEDITOR.instances.NoiDung.getData().trim();
+
+      // Kiểm tra hợp lệ
+      if (!form.checkValidity() || noiDung === "") {
+        event.preventDefault();
+        event.stopPropagation();
+
+        // Hiển thị lỗi cho CKEditor (thủ công)
+        const textArea = document.getElementById('NoiDung');
+        textArea.classList.add('is-invalid');
+      } else {
+        // Đảm bảo textarea có dữ liệu để gửi đi
+        CKEDITOR.instances.NoiDung.updateElement();
+      }
+
+      form.classList.add('was-validated');
     });
+  });
+</script>
+<script>
+  function startTutorial() {
+    const pageType = "<%= pageType || '' %>";// Lấy từ biến render ở server
 
-    // Kiểm tra form và CKEditor khi submit
-    document.addEventListener('DOMContentLoaded', function () {
-        const form = document.querySelector('.needs-validation');
+    let steps = [];
 
-        form.addEventListener('submit', function (event) {
-            // Lấy nội dung từ CKEditor
-            const noiDung = CKEDITOR.instances.NoiDung.getData().trim();
+    if (pageType === 'trangchu') {
+      steps = [
+        {
+          element: document.querySelector('.card.bg-dark'),
+          intro: "Đây là trang quản lý ghi chú của bạn. Tất cả ghi chú sẽ được hiển thị dưới dạng thẻ tiện lợi giúp bạn dễ dàng tìm kiếm và quản lý.",
+          position: 'bottom'
+        },
+        {
+          element: document.querySelector('.btn-neon.btn-sm'),
+          intro: "Nhấn vào nút 'Xem chi tiết' để đọc toàn bộ nội dung ghi chú. Trong chế độ xem chi tiết, bạn có thể chỉnh sửa nội dung ghi chú nếu cần.",
+          position: 'top'
+        },
+        {
+          element: document.querySelector('.btn-danger.btn-sm'),
+          intro: "Nút 'Xóa' sẽ giúp bạn loại bỏ ghi chú không cần thiết. Hệ thống luôn yêu cầu xác nhận trước khi xóa để tránh nhầm lẫn.",
+          position: 'top'
+        },
+        {
+          element: document.querySelector('#tutorialButton'),
+          intro: "Bạn có thể xem lại hướng dẫn này bất kỳ lúc nào bằng cách nhấn vào nút 'Hướng dẫn sử dụng'.",
+          position: 'left'
+        },
+        {
+          intro: "Bạn đã hoàn thành hướng dẫn cơ bản! Hãy bắt đầu tạo và quản lý ghi chú của bạn."
+        }
+      ];
+    }
 
-            // Kiểm tra hợp lệ
-            if (!form.checkValidity() || noiDung === "") {
-                event.preventDefault();
-                event.stopPropagation();
+    else if (pageType === 'taikhoan') {
+      steps = [
+        {
+          element: document.getElementById('accountTable'),
+          intro: "Đây là bảng danh sách tài khoản. Bạn có thể xem tất cả thông tin tài khoản được hiển thị theo từng hàng.",
+          position: 'bottom'
+        },
+        {
+          element: document.getElementById('addAccountBtn'),
+          intro: "Nhấn vào nút này để thêm tài khoản mới vào hệ thống.",
+          position: 'bottom'
+        },
+        {
+          element: document.querySelector('.edit-account'),
+          intro: "Nhấn vào biểu tượng bút chì để chỉnh sửa thông tin tài khoản.",
+          position: 'left'
+        },
+        {
+          element: document.querySelector('.delete-account'),
+          intro: "Nhấn vào biểu tượng thùng rác để xóa tài khoản. Hệ thống sẽ yêu cầu xác nhận trước khi xóa.",
+          position: 'left'
+        },
+        {
+          element: document.querySelector('td:nth-child(6)'),
+          intro: "Biểu tượng này hiển thị trạng thái tài khoản: <i class='bi bi-check-circle text-success'></i> là đang hoạt động, <i class='bi bi-x-square text-danger'></i> là đã bị khóa.",
+          position: 'right'
+        },
+        {
+          intro: "Bạn đã hoàn thành hướng dẫn sử dụng trang quản lý tài khoản. Bạn có thể xem lại hướng dẫn bất cứ lúc nào bằng cách nhấn vào nút 'Hướng dẫn sử dụng'."
+        }
+      ];
+    }
 
-                // Hiển thị lỗi cho CKEditor (thủ công)
-                const textArea = document.getElementById('NoiDung');
-                textArea.classList.add('is-invalid');
-            } else {
-                // Đảm bảo textarea có dữ liệu để gửi đi
-                CKEDITOR.instances.NoiDung.updateElement();
-            }
+    else if (pageType === 'taikhoan_cuatoi') {
+      steps = [
+        {
+          element: document.getElementById('hoVaTenGroup'),
+          intro: 'Cập nhật họ và tên của bạn tại đây.',
+          position: 'top'
+        },
+        {
+          element: document.getElementById('tenDangNhapGroup'),
+          intro: 'Cập nhật tên đăng nhập của bạn tại đây.',
+          position: 'top'
+        },
+        {
+          element: document.getElementById('emailGroup'),
+          intro: 'Nếu cần, bạn có thể chỉnh sửa địa chỉ email của mình.',
+          position: 'top'
+        },
+        {
+          element: document.getElementById('matKhauGroup'),
+          intro: 'Nhập mật khẩu mới nếu muốn đổi.',
+          position: 'top'
+        },
+        {
+          element: document.getElementById('xacNhanGroup'),
+          intro: 'Xác nhận lại mật khẩu để chắc chắn.',
+          position: 'top'
+        },
+        {
+          element: document.getElementById('btnLuu'),
+          intro: 'Nhấn vào đây để lưu các thay đổi.',
+          position: 'right'
+        },
+        {
+          intro: "Bạn đã hoàn thành hướng dẫn sử dụng trang quản lý tài khoản cá nhân của bạn. Bạn có thể xem lại hướng dẫn bất cứ lúc nào bằng cách nhấn vào nút 'Hướng dẫn sử dụng'."
+        }
+      ];
+    }
 
-            form.classList.add('was-validated');
-        });
-    });
+    else if (pageType === 'taikhoan_sua') {
+      steps = [
+      {
+						element: document.getElementById('basicInfoSection'),
+						intro: "Đây là phần thông tin cơ bản của tài khoản. Bạn có thể cập nhật họ tên và email tại đây.",
+						position: 'bottom'
+					},
+					{
+						element: document.getElementById('avatarSection'),
+						intro: "Bạn có thể thay đổi ảnh đại diện bằng cách chọn file ảnh mới. Ảnh hiện tại sẽ được hiển thị nếu có.",
+						position: 'top'
+					},
+					{
+						element: document.getElementById('accountSettingsSection'),
+						intro: "Phần cài đặt tài khoản bao gồm tên đăng nhập và quyền hạn. Lưu ý tên đăng nhập phải là duy nhất.",
+						position: 'bottom'
+					},
+					{
+						element: document.getElementById('accountStatusSection'),
+						intro: "Bạn có thể kích hoạt hoặc khóa tài khoản tại đây. Tài khoản bị khóa sẽ không thể đăng nhập.",
+						position: 'top'
+					},
+					{
+						element: document.getElementById('passwordSection'),
+						intro: "Nếu muốn thay đổi mật khẩu, hãy nhập vào cả hai trường. Bỏ trống nếu giữ nguyên mật khẩu cũ.",
+						position: 'bottom'
+					},
+					{
+						element: document.getElementById('submitButton'),
+						intro: "Sau khi hoàn tất các thay đổi, nhấn nút này để cập nhật thông tin tài khoản.",
+						position: 'left'
+					},
+					{
+						intro: "Bạn đã hoàn thành hướng dẫn sử dụng trang chỉnh sửa tài khoản. Bạn có thể xem lại hướng dẫn bất cứ lúc nào bằng cách nhấn vào nút 'Hướng dẫn sử dụng'."
+					}
+      ];
+    }
+
+    else if (pageType === 'taikhoan_them') {
+      steps = [
+					{
+						intro: "Chào mừng bạn đến với trang thêm tài khoản mới. Hãy cùng tìm hiểu cách sử dụng!"
+					},
+					{
+						element: document.getElementById('fullNameField'),
+						intro: "Nhập họ và tên đầy đủ của người dùng. Đây là trường bắt buộc.",
+						position: 'bottom'
+					},
+					{
+						element: document.getElementById('emailField'),
+						intro: "Nhập địa chỉ email của người dùng. Email phải đúng định dạng (có thể bỏ trống).",
+						position: 'bottom'
+					},
+					{
+						element: document.getElementById('avatarField'),
+						intro: "Tải lên hình ảnh đại diện cho tài khoản. Chỉ chấp nhận file ảnh (có thể bỏ trống).",
+						position: 'bottom'
+					},
+					{
+						element: document.getElementById('usernameField'),
+						intro: "Nhập tên đăng nhập (username) cho tài khoản. Đây là trường bắt buộc.",
+						position: 'bottom'
+					},
+					{
+						element: document.getElementById('passwordField'),
+						intro: "Nhập mật khẩu cho tài khoản. Mật khẩu phải có ít nhất 6 ký tự.",
+						position: 'bottom'
+					},
+					{
+						element: document.getElementById('confirmPasswordField'),
+						intro: "Nhập lại mật khẩu để xác nhận. Phải khớp với mật khẩu đã nhập ở trên.",
+						position: 'bottom'
+					},
+					{
+						element: document.getElementById('roleField'),
+						intro: "Chọn quyền hạn cho tài khoản. Admin có toàn quyền, User có quyền hạn hạn chế.",
+						position: 'bottom'
+					},
+					{
+						element: document.getElementById('submitButton'),
+						intro: "Sau khi điền đầy đủ thông tin, nhấn nút này để tạo tài khoản mới.",
+						position: 'top'
+					},
+					{
+						intro: "Bạn đã hoàn thành hướng dẫn. Bây giờ bạn có thể bắt đầu tạo tài khoản mới. Nếu cần trợ giúp, hãy nhấn vào nút 'Hướng dẫn sử dụng'."
+					}
+				];
+    }
+
+    else if (pageType === 'ghichu_chitiet') {
+      steps = [
+        {
+          element: document.getElementById('noteTitleSection'),
+          intro: "Đây là tiêu đề của ghi chú. Tiêu đề giúp bạn dễ dàng nhận biết và tìm kiếm ghi chú.",
+          position: 'bottom'
+        },
+        {
+          element: document.getElementById('noteContentSection'),
+          intro: "Đây là nội dung chính của ghi chú. Bạn có thể xem toàn bộ nội dung ở đây.",
+          position: 'top'
+        },
+        {
+          element: document.getElementById('editButton'),
+          intro: "Nhấn vào nút này để chỉnh sửa ghi chú hiện tại. Bạn có thể thay đổi tiêu đề và nội dung.",
+          position: 'left'
+        },
+        {
+          element: document.getElementById('backButton'),
+          intro: "Nhấn vào nút này để quay lại danh sách tất cả ghi chú của bạn.",
+          position: 'right'
+        },
+        {
+          intro: "Bạn đã hoàn thành hướng dẫn sử dụng trang xem chi tiết ghi chú. Bạn có thể xem lại hướng dẫn bất cứ lúc nào bằng cách nhấn vào nút 'Hướng dẫn sử dụng'."
+        }
+      ];
+    }
+
+    else if (pageType === 'ghichu_cuatoi') {
+      steps = [
+        {
+          element: document.getElementById('noteTableSection'),
+          intro: "Đây là bảng danh sách các ghi chú của bạn. Bạn có thể xem tiêu đề, ngày đăng và thực hiện các hành động.",
+          position: 'top'
+        },
+        {
+          element: document.querySelector('.view-note'),
+          intro: "Nhấn vào biểu tượng con mắt để xem chi tiết ghi chú của bạn.",
+          position: 'right'
+        },
+        {
+          element: document.querySelector('.delete-note'),
+          intro: "Nhấn vào biểu tượng thùng rác để xóa ghi chú của bạn. Hệ thống sẽ yêu cầu xác nhận trước khi xóa.",
+          position: 'right'
+        },
+        {
+          intro: "Bạn đã hoàn thành hướng dẫn sử dụng trang xem ghi chú của chính bạn. Bạn có thể xem lại hướng dẫn bất cứ lúc nào bằng cách nhấn vào nút 'Hướng dẫn sử dụng'."
+        }
+      ];
+    }
+
+    else if (pageType === 'ghichu_sua') {
+      steps = [
+        {
+          element: document.getElementById('titleField'),
+          intro: "Nhập tiêu đề ngắn gọn, súc tích cho ghi chú của bạn.",
+          position: 'top'
+        },
+        {
+          element: document.getElementById('contentField'),
+          intro: "Nhập đầy đủ nội dung chi tiết cho ghi chú ở đây.",
+          position: 'top'
+        },
+        {
+          element: document.querySelector('.back-note'),
+          intro: "Nhấn vào nút 'Quay lại' để trở lại danh sách ghi chú",
+          position: 'right'
+        },
+        {
+          element: document.querySelector('.save-note'),
+          intro: "Nhấn vào nút 'Lưu' để lưu danh sách ghi chú",
+          position: 'right'
+        },
+        {
+          intro: "Bạn đã hoàn thành hướng dẫn sử dụng trang sửa ghi chú. Bạn có thể xem lại hướng dẫn bất cứ lúc nào bằng cách nhấn vào nút 'Hướng dẫn sử dụng'."
+        }
+      ];
+    }
+
+    else if (pageType === 'ghichu_them') {
+      steps = [
+        {
+          element: document.getElementById('titleField'),
+          intro: 'Nhập tiêu đề cho ghi chú của bạn ở đây.',
+          position: 'top'
+        },
+        {
+          element: document.getElementById('contentField'),
+          intro: 'Nhập đầy đủ nội dung ghi chú vào ô này.',
+          position: 'top'
+        },
+        {
+          element: document.getElementById('buttonLuu'),
+          intro: 'Sau khi hoàn tất, nhấn vào đây để lưu ghi chú.',
+          position: 'right'
+        },
+        {
+          intro: "Bạn đã hoàn thành hướng dẫn sử dụng trang thêm ghi chú. Bạn có thể xem lại hướng dẫn bất cứ lúc nào bằng cách nhấn vào nút 'Hướng dẫn sử dụng'."
+        }
+      ];
+    }
+
+    // Gọi intro.js nếu có bước hướng dẫn
+    if (steps.length > 0) {
+      introJs().setOptions({
+        nextLabel: 'Tiếp tục →',
+        prevLabel: '← Quay lại',
+        doneLabel: 'Hoàn thành',
+        showStepNumbers: false,
+        showBullets: true,
+        showProgress: true,
+        tooltipClass: 'custom-tooltip',
+        steps: steps
+      }).start();
+    }
+  }
 </script>

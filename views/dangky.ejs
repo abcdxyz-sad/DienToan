@@ -39,12 +39,12 @@
         </div>
 
         <div class="login__box">
-          <input type="password" name="MatKhau" placeholder="Mật khẩu" required class="login__input" />
+          <input type="password" id="MatKhau" name="MatKhau" placeholder="Mật khẩu" required class="login__input" />
           <i class="ri-lock-fill"></i>
         </div>
 
         <div class="login__box">
-          <input type="password" name="XacNhanMatKhau" placeholder="Xác nhận mật khẩu" required class="login__input" />
+          <input type="password" id="XacNhanMatKhau" name="XacNhanMatKhau" placeholder="Xác nhận mật khẩu" required class="login__input" />
           <i class="ri-lock-password-fill"></i>
         </div>
       </div>
@@ -75,6 +75,16 @@
     </form>
   </div>
 </body>
+<script>
+  document.querySelector("form").addEventListener("submit", function (e) {
+    const mk = document.getElementById("MatKhau").value;
+    const xnm = document.getElementById("XacNhanMatKhau").value;
+    if (mk && mk !== xnm) {
+      alert("Mật khẩu xác nhận không khớp!");
+      e.preventDefault();
+    }
+  });
+</script>
 <%- include('javascript') %>
 
 </html>

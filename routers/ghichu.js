@@ -8,7 +8,8 @@ router.get('/', async (req, res) => {
         .populate('TaiKhoan').exec();
     res.render('ghichu', {
         title: 'Danh sách ghi chú',
-        ghichu: gc
+        ghichu: gc,
+        pageType: 'ghichu'
     });
 });
 
@@ -17,7 +18,8 @@ router.get('/them', async (req, res) => {
 	var gc = await GhiChu.find();
     res.render('ghichu_them', {
         title: 'Lưu ghi chú',
-        ghichu: gc
+        ghichu: gc,
+        pageType: 'ghichu_them'
     });
 });
 
@@ -44,7 +46,8 @@ router.get('/sua/:id', async (req, res) => {
     var gc = await GhiChu.findById(id);
     res.render('ghichu_sua', {
         title: 'Sửa ghi chú',
-        ghichu: gc
+        ghichu: gc,
+        pageType: 'ghichu_sua'
     });
 });
 
@@ -77,7 +80,8 @@ router.get('/cuatoi', async (req, res) => {
 
 		res.render('ghichu_cuatoi', {
 			title: 'Ghi chú của tôi',
-			ghichu: gc
+			ghichu: gc,
+            pageType: 'ghichu_cuatoi'
 		});
 	} else {
 		res.redirect('/dangnhap');
@@ -90,7 +94,8 @@ router.get('/chitiet/:id', async (req, res) => {
     var gc = await GhiChu.findById(id).populate('TaiKhoan');
     res.render('ghichu_chitiet', {
         title: 'Chi tiết ghi chú',
-        ghichu: gc
+        ghichu: gc,
+        pageType: 'ghichu_chitiet'
     });
 }); 
 

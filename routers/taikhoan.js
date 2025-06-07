@@ -13,6 +13,7 @@ router.get("/", async (req, res) => {
 	res.render("taikhoan", {
 		title: "Danh sách tài khoản",
 		taikhoan: tk,
+		pageType: 'taikhoan'
 	});
 });
 
@@ -20,6 +21,7 @@ router.get("/", async (req, res) => {
 router.get("/them", async (req, res) => {
 	res.render("taikhoan_them", {
 		title: "Thêm tài khoản",
+		pageType: 'taikhoan_them'
 	});
 });
 
@@ -63,6 +65,7 @@ router.get("/cuatoi/:id", async (req, res) => {
 	res.render("taikhoan_cuatoi", {
 		title: "Hồ sơ cá nhân",
 		taikhoan: tk,
+		pageType: 'taikhoan_cuatoi'
 	});
 });
 
@@ -73,6 +76,7 @@ router.get("/sua/:id", async (req, res) => {
 	res.render("taikhoan_sua", {
 		title: "Sửa tài khoản",
 		taikhoan: tk,
+		pageType: 'taikhoan_sua'
 	});
 });
 

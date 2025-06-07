@@ -13,7 +13,8 @@ router.get('/', async (req, res) => {
   res.render('index', {
     title: 'Trang chủ',
     ghichu: gc,
-    isLoggedIn: !!req.session.MaNguoiDung
+    isLoggedIn: !!req.session.MaNguoiDung,
+    pageType: 'trangchu'
   });
 });
 
@@ -21,14 +22,16 @@ router.get('/', async (req, res) => {
 // GET: Lỗi
 router.get('/error', async (req, res) => {
     res.render('error', {
-        title: 'Lỗi'
+        title: 'Lỗi',
+        pageType: 'error'
     });
 });
 
 // GET: Thành công
 router.get('/success', async (req, res) => {
     res.render('success', {
-        title: 'Hoàn thành'
+        title: 'Hoàn thành',
+        pageType: 'success'
     });
 });
 

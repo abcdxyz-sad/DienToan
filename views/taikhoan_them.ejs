@@ -6,18 +6,22 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" />
+	<!-- Intro.js CSS -->
+	<link rel="stylesheet" href="https://unpkg.com/intro.js/minified/introjs.min.css" />
 	<title>
 		<%= title %> - Quản lý ghi chú
 	</title>
 	<style>
 		body {
-			background-color: #121212;
+			background-color: #222222;
 			color: #ffffff;
 		}
 
 		.card {
 			background-color: #1e1e1e;
-			border: none;
+			border: 1px solid #333;
+			box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+			border-radius: 8px;
 		}
 
 		.card-header {
@@ -26,18 +30,30 @@
 			color: white;
 		}
 
-		.form-control,
-		.form-select {
+		.form-control {
 			background-color: #2a2a2a;
 			color: #ffffff;
 			border: 1px solid #444;
+		}
+
+		.form-select {
+			appearance: none;
+			-webkit-appearance: none;
+			-moz-appearance: none;
+			background-color: #2a2a2a;
+			color: #ffffff;
+			border: 1px solid #444;
+			padding: 10px 40px 10px 15px;
+			border-radius: 6px;
+			background-image: url("data:image/svg+xml;utf8,<svg fill='%23ffffff' height='20' viewBox='0 0 24 24' width='20' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+			background-size: 25px;
 		}
 
 		.form-control:focus,
 		.form-select:focus {
 			background-color: #2a2a2a;
 			color: #ffffff;
-			border-color: #0d6efd;
+			border-color: #0da1fd;
 		}
 
 		.form-label {
@@ -47,6 +63,31 @@
 		.alert a {
 			color: #ffffff;
 			text-decoration: underline;
+		}
+
+		/* Custom intro.js style */
+		.introjs-tooltip {
+			background-color: #1e1e1e;
+			border: 1px solid #00ffff;
+			color: #00ffff;
+		}
+
+		.introjs-button {
+			background-color: #6c5ce7;
+			color: black;
+			text-shadow: none;
+		}
+
+		.introjs-button:hover {
+			background-color: #00aeff;
+		}
+
+		.introjs-bullets ul li a {
+			background-color: #333;
+		}
+
+		.introjs-bullets ul li a.active {
+			background-color: #00ffff;
 		}
 	</style>
 </head>
@@ -58,67 +99,80 @@
 			<%- include('navbar') %>
 
 				<!-- Main content -->
-				<div class="card mt-3">
-					<div class="card-header">
+				<div class="card mt-3 text-light">
+					<div class="card-header d-flex justify-content-between align-items-center">
 						<h3>Thêm tài khoản</h3>
 					</div>
 					<div class="card-body">
 						<form action="/taikhoan/them" method="post" class="needs-validation"
-							enctype="multipart/form-data" novalidate>
-							<div class="mb-3">
+							enctype="multipart/form-data" novalidate id="accountForm">
+							<div class="mb-3" id="fullNameField">
 								<label for="HoVaTen" class="form-label">Họ và tên</label>
 								<input type="text" class="form-control" id="HoVaTen" name="HoVaTen" required />
+								<div class="invalid-feedback">Vui lòng nhập họ và tên</div>
 							</div>
 
-							<div class="mb-3">
+							<div class="mb-3" id="emailField">
 								<label for="Email" class="form-label">Email</label>
 								<input type="email" class="form-control" id="Email" name="Email" />
 							</div>
 
-							<div class="mb-3">
+							<div class="mb-3" id="avatarField">
 								<label for="HinhAnh" class="form-label">Hình ảnh</label>
 								<input type="file" class="form-control" id="HinhAnh" name="Avatar" accept="image/*" />
 							</div>
 
-							<div class="mb-3">
+							<div class="mb-3" id="usernameField">
 								<label for="TenDangNhap" class="form-label">Tên đăng nhập</label>
 								<input type="text" class="form-control" id="TenDangNhap" name="TenDangNhap" required />
+								<div class="invalid-feedback">Vui lòng nhập tên đăng nhập</div>
 							</div>
 
-							<div class="mb-3">
+							<div class="mb-3" id="passwordField">
 								<label for="MatKhau" class="form-label">Mật khẩu</label>
 								<input type="password" class="form-control" id="MatKhau" name="MatKhau" required />
+								<div class="invalid-feedback">Vui lòng nhập mật khẩu</div>
 							</div>
 
-							<div class="mb-3">
+							<div class="mb-3" id="confirmPasswordField">
 								<label for="XacNhanMatKhau" class="form-label">Xác nhận mật khẩu</label>
 								<input type="password" class="form-control" id="XacNhanMatKhau" name="XacNhanMatKhau"
 									required />
+								<div class="invalid-feedback">Vui lòng xác nhận mật khẩu</div>
 							</div>
 
-							<div class="mb-3">
+							<div class="mb-3" id="roleField">
 								<label for="QuyenHan" class="form-label">Quyền hạn</label>
 								<select class="form-select" id="QuyenHan" name="QuyenHan" required>
 									<option value="">Chọn quyền hạn</option>
 									<option value="admin">Admin</option>
 									<option value="user">User</option>
 								</select>
+								<div class="invalid-feedback">Vui lòng chọn quyền hạn</div>
 							</div>
 
-							<button type="submit" class="btn btn-primary">
+							<button type="submit" class="btn btn-primary" id="submitButton">
 								<i class="bi bi-cloud-arrow-up"></i> Thêm tài khoản
 							</button>
 						</form>
 					</div>
 				</div>
-
 				<!-- Footer -->
 				<%- include('footer') %>
 	</div>
-	<%- include('footer') %>
-		</div>
+	<script src="https://unpkg.com/intro.js/minified/intro.min.js"></script>
+	<script>
+		document.querySelector("form").addEventListener("submit", function (e) {
+			const mk = document.getElementById("MatKhau").value;
+			const xnm = document.getElementById("XacNhanMatKhau").value;
+			if (mk && mk !== xnm) {
+				alert("Mật khẩu xác nhận không khớp!");
+				e.preventDefault();
+			}
+		});
+	</script>
 
-		<%- include('javascript') %>
+	<%- include('javascript') %>
 </body>
 
 </html>

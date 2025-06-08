@@ -14,19 +14,39 @@ router.get('/dangky', async (req, res) => {
 
 // POST: Đăng ký
 router.post('/dangky', upload.single('Avatar'), async (req, res) => {
-    // req.body có dữ liệu form, req.file có ảnh
-    var salt = bcrypt.genSaltSync(10);
-    var data = {
-      HoVaTen: req.body.HoVaTen,
-      Email: req.body.Email,
-      HinhAnh: req.file ? '/uploads/avatar/' + req.file.filename : null,
-      TenDangNhap: req.body.TenDangNhap,
-      MatKhau: bcrypt.hashSync(req.body.MatKhau, salt)
-    };
-    await TaiKhoan.create(data);
-    req.session.success = 'Đã đăng ký tài khoản thành công.';
-    res.redirect('/success');
+    try {
+      // Kiểm tra trùng tên đăng nhập hoặc email
+      const tonTai = await TaiKhoan.findOne({
+        $or: [
+          { TenDangNhap: req.body.TenDangNhap },
+          { Email: req.body.Email }
+        ]
+      });
+  
+      if (tonTai) {
+        req.session.error = 'Tên đăng nhập hoặc email đã tồn tại.';
+        return res.redirect('/error');
+      }
+  
+      const salt = bcrypt.genSaltSync(10);
+      const data = {
+        HoVaTen: req.body.HoVaTen,
+        Email: req.body.Email,
+        HinhAnh: req.file ? '/uploads/avatar/' + req.file.filename : null,
+        TenDangNhap: req.body.TenDangNhap,
+        MatKhau: bcrypt.hashSync(req.body.MatKhau, salt)
+      };
+  
+      await TaiKhoan.create(data);
+      req.session.success = 'Đã đăng ký tài khoản thành công.';
+      res.redirect('/success');
+    } catch (err) {
+      console.error('Lỗi đăng ký:', err);
+      req.session.error = 'Lỗi đăng ký: ' + err.message;
+      res.redirect('/dangky');
+    }
   });
+  
 
 // GET: Đăng nhập
 router.get('/dangnhap', async (req, res) => {

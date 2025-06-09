@@ -100,6 +100,53 @@
     .introjs-bullets ul li a.active {
       background-color: #00ffff;
     }
+
+    @media (max-width: 767.98px) {
+    /* Card: chiều rộng full trên mobile, margin hợp lý */
+    .col-md-3 {
+      flex: 0 0 100%;
+      max-width: 100%;
+    }
+    
+    /* Giảm padding và font-size icon */
+    .bi-journal-text {
+      padding-left: 20px !important;
+      padding-right: 20px !important;
+      font-size: 3.5rem !important;
+    }
+
+    /* Giảm khoảng cách và padding trong card */
+    .card-body {
+      padding: 1rem;
+    }
+
+    /* Giảm font size tiêu đề */
+    .card-title {
+      font-size: 1.1rem;
+    }
+
+    /* Giảm font size text thời gian */
+    .text-warning {
+      font-size: 0.85rem !important;
+    }
+
+    /* Nút btn-neon full chiều rộng */
+    .btn-neon, .btn-danger {
+      width: 100%;
+      font-size: 0.9rem;
+      padding: 0.375rem 0;
+    }
+
+    /* Khoảng cách giữa 2 nút */
+    .mt-auto.d-grid.gap-2 > a + a {
+      margin-top: 0.5rem;
+    }
+
+    /* Giảm margin ngoài card */
+    .mb-4 {
+      margin-bottom: 1rem !important;
+    }
+  }
   </style>
 </head>
 
@@ -167,10 +214,10 @@
                 </div>
                 <% } %>
           </div>
-        </div>    
+        </div>
   </div>
   <%- include('footer') %>
-  <%- include('javascript') %>
+    <%- include('javascript') %>
 </body>
 
 </html>

@@ -4,7 +4,7 @@ var GhiChu = require('../models/ghichu');
 
 // GET: Danh sách ghi chú
 router.get('/', async (req, res) => {
-	var gc = await GhiChu.find()
+    var gc = await GhiChu.find()
         .populate('TaiKhoan').exec();
     res.render('ghichu', {
         title: 'Danh sách ghi chú',
@@ -15,7 +15,7 @@ router.get('/', async (req, res) => {
 
 // GET: Lưu ghi chú
 router.get('/them', async (req, res) => {
-	var gc = await GhiChu.find();
+    var gc = await GhiChu.find();
     res.render('ghichu_them', {
         title: 'Lưu ghi chú',
         ghichu: gc,
@@ -25,7 +25,7 @@ router.get('/them', async (req, res) => {
 
 // POST: Lưu ghi chú
 router.post('/them', async (req, res) => {
-    if(req.session.MaNguoiDung) {
+    if (req.session.MaNguoiDung) {
         var data = {
             TaiKhoan: req.session.MaNguoiDung,
             TieuDe: req.body.TieuDe,
@@ -53,10 +53,12 @@ router.get('/sua/:id', async (req, res) => {
 
 // POST: Sửa ghi chú
 router.post('/sua/:id', async (req, res) => {
-	var id = req.params.id;
+    var id = req.params.id;
     var data = {
+        TaiKhoan: req.session.MaNguoiDung,
         TieuDe: req.body.TieuDe,
-        NoiDung: req.body.NoiDung
+        NoiDung: req.body.NoiDung,
+        NgayDang: new Date()
     };
     await GhiChu.findByIdAndUpdate(id, data);
     req.session.success = 'Đã cập nhật ghi chú thành công.';
@@ -65,7 +67,7 @@ router.post('/sua/:id', async (req, res) => {
 
 // GET: Xóa ghi chú
 router.get('/xoa/:id', async (req, res) => {
-	var id = req.params.id;
+    var id = req.params.id;
     await GhiChu.findByIdAndDelete(id);
 
     // Trở lại trang trước
@@ -74,18 +76,18 @@ router.get('/xoa/:id', async (req, res) => {
 
 // GET: Danh sách ghi chú của tôi
 router.get('/cuatoi', async (req, res) => {
-	if (req.session.MaNguoiDung) {
-		const id = req.session.MaNguoiDung;
-		const gc = await GhiChu.find({ TaiKhoan: id }).exec();
+    if (req.session.MaNguoiDung) {
+        const id = req.session.MaNguoiDung;
+        const gc = await GhiChu.find({ TaiKhoan: id }).exec();
 
-		res.render('ghichu_cuatoi', {
-			title: 'Ghi chú của tôi',
-			ghichu: gc,
+        res.render('ghichu_cuatoi', {
+            title: 'Ghi chú của tôi',
+            ghichu: gc,
             pageType: 'ghichu_cuatoi'
-		});
-	} else {
-		res.redirect('/dangnhap');
-	}
+        });
+    } else {
+        res.redirect('/dangnhap');
+    }
 });
 
 // GET: Xem chi tiết ghi chú
@@ -97,6 +99,58 @@ router.get('/chitiet/:id', async (req, res) => {
         ghichu: gc,
         pageType: 'ghichu_chitiet'
     });
-}); 
+});
+
+// GET: Tìm kiếm ghi chú theo tiêu đề
+router.get('/timkiem', async (req, res) => {
+    const tuKhoa = req.query.q || '';
+    const taiKhoanId = req.session.MaNguoiDung;
+  
+    if (!taiKhoanId) {
+      return res.status(403).render('error', {
+        message: 'Bạn phải đăng nhập để tìm kiếm ghi chú.',
+        error: {}
+      });
+    }
+
+    if (!tuKhoa.trim()) {
+        return res.redirect('/');
+      }
+  
+    try {
+      const ghichu = await GhiChu.find({
+        TaiKhoan: taiKhoanId,
+        TieuDe: { $regex: tuKhoa, $options: 'i' }
+      });
+  
+      if (!ghichu.length) {
+        return res.render('index', {
+          title: `Kết quả tìm cho "${tuKhoa}"`,
+          ghichu: [],
+          tuKhoa,
+          notFound: true,  // thêm biến này báo không tìm thấy
+          pageType: 'trangchu',
+          session: req.session
+        });
+      }
+  
+      res.render('index', {
+        title: `Kết quả tìm cho "${tuKhoa}"`,
+        ghichu,
+        tuKhoa,
+        notFound: false,
+        pageType: 'trangchu',
+        session: req.session
+      });
+    } catch (err) {
+      console.error(err);
+      res.status(500).render('error', {
+        message: 'Lỗi khi tìm kiếm ghi chú.',
+        error: err
+      });
+    }
+  });
+  
+  
 
 module.exports = router;

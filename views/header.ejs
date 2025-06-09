@@ -1,20 +1,78 @@
-<header class="header py-3 primary text-white header-gradient">
-    <div class="container d-flex justify-content-between align-items-center">
-        <div class="d-flex flex-column">
+<header class="header py-3 text-white header-gradient">
+    <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center">
+        <div class="d-flex flex-column mb-3 mb-md-0">
             <div class="d-flex align-items-center">
                 <i class="bi bi-stickies fs-3 me-2"></i>
                 <a href="/" class="text-white text-decoration-none">
                     <h1 class="fw-bold mb-0">ThinkBoard</h1>
                 </a>
             </div>
-            <p class="mb-0 small mt-2">Taking note anything</p>
+            <p class="mb-0 small">Taking note anything</p>
         </div>
-        </form>
+
+        <% if (typeof session !=="undefined" && session.MaNguoiDung) { %>
+            <form action="/ghichu/timkiem" method="GET" class="cyber-search-container shadow-sm">
+                <input type="text" name="q" class="cyber-search-input" placeholder="Tìm kiếm ghi chú..."
+                    value="<%= typeof tuKhoa !== 'undefined' ? tuKhoa : '' %>" />
+                <button type="submit" class="cyber-search-btn">
+                    <i class="bi bi-search"></i> Tìm
+                </button>
+            </form>
+            <% } %>
     </div>
 </header>
+
+
 <style>
     .header-gradient {
-        background: #00cac3;
         background: linear-gradient(135deg, rgba(0, 202, 195, 1) 0%, rgba(106, 130, 251, 1) 43%, rgba(95, 44, 130, 1) 98%);
+        border-bottom: 2px solid rgba(0, 255, 255, 0.2);
+    }
+
+    .cyber-search-container {
+        display: flex;
+        border: 1px solid #00ffff;
+        background: #121212;
+        border-radius: 6px;
+        overflow: hidden;
+    }
+
+    .cyber-search-input {
+        flex-grow: 1;
+        background: transparent;
+        border: none;
+        padding: 10px 14px;
+        color: #e0e0e0;
+        font-family: 'Courier New', monospace;
+        font-size: 15px;
+        outline: none;
+    }
+
+    .cyber-search-input::placeholder {
+        color: #999;
+        opacity: 0.6;
+    }
+
+    .cyber-search-input:focus {
+        background-color: #1a1a1a;
+    }
+
+    .cyber-search-btn {
+        background: linear-gradient(to right, #6c5ce7, #00d2ff);
+        color: #fff;
+        border: none;
+        padding: 0 18px;
+        font-family: 'Courier New', monospace;
+        font-size: 15px;
+        font-weight: 600;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
+
+    .cyber-search-btn:hover {
+        background: linear-gradient(to right, #8e44ad, #00ffff);
+        box-shadow: 0 0 10px #00ffff55;
     }
 </style>

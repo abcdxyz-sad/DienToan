@@ -92,6 +92,11 @@
     let steps = [];
 
     if (pageType === 'trangchu') {
+      const hasNotes = document.querySelector('.card-custom');
+      if (!hasNotes) {
+        alert("Hiện chưa có ghi chú để hướng dẫn. Vui lòng tạo ghi chú trước!");
+        return; // Không chạy introJs
+      }
       steps = [
         {
           element: document.querySelector('.card.bg-dark'),
@@ -192,91 +197,91 @@
 
     else if (pageType === 'taikhoan_sua') {
       steps = [
-      {
-						element: document.getElementById('basicInfoSection'),
-						intro: "Đây là phần thông tin cơ bản của tài khoản. Bạn có thể cập nhật họ tên và email tại đây.",
-						position: 'bottom'
-					},
-					{
-						element: document.getElementById('avatarSection'),
-						intro: "Bạn có thể thay đổi ảnh đại diện bằng cách chọn file ảnh mới. Ảnh hiện tại sẽ được hiển thị nếu có.",
-						position: 'top'
-					},
-					{
-						element: document.getElementById('accountSettingsSection'),
-						intro: "Phần cài đặt tài khoản bao gồm tên đăng nhập và quyền hạn. Lưu ý tên đăng nhập phải là duy nhất.",
-						position: 'bottom'
-					},
-					{
-						element: document.getElementById('accountStatusSection'),
-						intro: "Bạn có thể kích hoạt hoặc khóa tài khoản tại đây. Tài khoản bị khóa sẽ không thể đăng nhập.",
-						position: 'top'
-					},
-					{
-						element: document.getElementById('passwordSection'),
-						intro: "Nếu muốn thay đổi mật khẩu, hãy nhập vào cả hai trường. Bỏ trống nếu giữ nguyên mật khẩu cũ.",
-						position: 'bottom'
-					},
-					{
-						element: document.getElementById('submitButton'),
-						intro: "Sau khi hoàn tất các thay đổi, nhấn nút này để cập nhật thông tin tài khoản.",
-						position: 'left'
-					},
-					{
-						intro: "Bạn đã hoàn thành hướng dẫn sử dụng trang chỉnh sửa tài khoản. Bạn có thể xem lại hướng dẫn bất cứ lúc nào bằng cách nhấn vào nút 'Hướng dẫn sử dụng'."
-					}
+        {
+          element: document.getElementById('basicInfoSection'),
+          intro: "Đây là phần thông tin cơ bản của tài khoản. Bạn có thể cập nhật họ tên và email tại đây.",
+          position: 'bottom'
+        },
+        {
+          element: document.getElementById('avatarSection'),
+          intro: "Bạn có thể thay đổi ảnh đại diện bằng cách chọn file ảnh mới. Ảnh hiện tại sẽ được hiển thị nếu có.",
+          position: 'top'
+        },
+        {
+          element: document.getElementById('accountSettingsSection'),
+          intro: "Phần cài đặt tài khoản bao gồm tên đăng nhập và quyền hạn. Lưu ý tên đăng nhập phải là duy nhất.",
+          position: 'bottom'
+        },
+        {
+          element: document.getElementById('accountStatusSection'),
+          intro: "Bạn có thể kích hoạt hoặc khóa tài khoản tại đây. Tài khoản bị khóa sẽ không thể đăng nhập.",
+          position: 'top'
+        },
+        {
+          element: document.getElementById('passwordSection'),
+          intro: "Nếu muốn thay đổi mật khẩu, hãy nhập vào cả hai trường. Bỏ trống nếu giữ nguyên mật khẩu cũ.",
+          position: 'bottom'
+        },
+        {
+          element: document.getElementById('submitButton'),
+          intro: "Sau khi hoàn tất các thay đổi, nhấn nút này để cập nhật thông tin tài khoản.",
+          position: 'left'
+        },
+        {
+          intro: "Bạn đã hoàn thành hướng dẫn sử dụng trang chỉnh sửa tài khoản. Bạn có thể xem lại hướng dẫn bất cứ lúc nào bằng cách nhấn vào nút 'Hướng dẫn sử dụng'."
+        }
       ];
     }
 
     else if (pageType === 'taikhoan_them') {
       steps = [
-					{
-						intro: "Chào mừng bạn đến với trang thêm tài khoản mới. Hãy cùng tìm hiểu cách sử dụng!"
-					},
-					{
-						element: document.getElementById('fullNameField'),
-						intro: "Nhập họ và tên đầy đủ của người dùng. Đây là trường bắt buộc.",
-						position: 'bottom'
-					},
-					{
-						element: document.getElementById('emailField'),
-						intro: "Nhập địa chỉ email của người dùng. Email phải đúng định dạng (có thể bỏ trống).",
-						position: 'bottom'
-					},
-					{
-						element: document.getElementById('avatarField'),
-						intro: "Tải lên hình ảnh đại diện cho tài khoản. Chỉ chấp nhận file ảnh (có thể bỏ trống).",
-						position: 'bottom'
-					},
-					{
-						element: document.getElementById('usernameField'),
-						intro: "Nhập tên đăng nhập (username) cho tài khoản. Đây là trường bắt buộc.",
-						position: 'bottom'
-					},
-					{
-						element: document.getElementById('passwordField'),
-						intro: "Nhập mật khẩu cho tài khoản. Mật khẩu phải có ít nhất 6 ký tự.",
-						position: 'bottom'
-					},
-					{
-						element: document.getElementById('confirmPasswordField'),
-						intro: "Nhập lại mật khẩu để xác nhận. Phải khớp với mật khẩu đã nhập ở trên.",
-						position: 'bottom'
-					},
-					{
-						element: document.getElementById('roleField'),
-						intro: "Chọn quyền hạn cho tài khoản. Admin có toàn quyền, User có quyền hạn hạn chế.",
-						position: 'bottom'
-					},
-					{
-						element: document.getElementById('submitButton'),
-						intro: "Sau khi điền đầy đủ thông tin, nhấn nút này để tạo tài khoản mới.",
-						position: 'top'
-					},
-					{
-						intro: "Bạn đã hoàn thành hướng dẫn. Bây giờ bạn có thể bắt đầu tạo tài khoản mới. Nếu cần trợ giúp, hãy nhấn vào nút 'Hướng dẫn sử dụng'."
-					}
-				];
+        {
+          intro: "Chào mừng bạn đến với trang thêm tài khoản mới. Hãy cùng tìm hiểu cách sử dụng!"
+        },
+        {
+          element: document.getElementById('fullNameField'),
+          intro: "Nhập họ và tên đầy đủ của người dùng. Đây là trường bắt buộc.",
+          position: 'bottom'
+        },
+        {
+          element: document.getElementById('emailField'),
+          intro: "Nhập địa chỉ email của người dùng. Email phải đúng định dạng (có thể bỏ trống).",
+          position: 'bottom'
+        },
+        {
+          element: document.getElementById('avatarField'),
+          intro: "Tải lên hình ảnh đại diện cho tài khoản. Chỉ chấp nhận file ảnh (có thể bỏ trống).",
+          position: 'bottom'
+        },
+        {
+          element: document.getElementById('usernameField'),
+          intro: "Nhập tên đăng nhập (username) cho tài khoản. Đây là trường bắt buộc.",
+          position: 'bottom'
+        },
+        {
+          element: document.getElementById('passwordField'),
+          intro: "Nhập mật khẩu cho tài khoản. Mật khẩu phải có ít nhất 6 ký tự.",
+          position: 'bottom'
+        },
+        {
+          element: document.getElementById('confirmPasswordField'),
+          intro: "Nhập lại mật khẩu để xác nhận. Phải khớp với mật khẩu đã nhập ở trên.",
+          position: 'bottom'
+        },
+        {
+          element: document.getElementById('roleField'),
+          intro: "Chọn quyền hạn cho tài khoản. Admin có toàn quyền, User có quyền hạn hạn chế.",
+          position: 'bottom'
+        },
+        {
+          element: document.getElementById('submitButton'),
+          intro: "Sau khi điền đầy đủ thông tin, nhấn nút này để tạo tài khoản mới.",
+          position: 'top'
+        },
+        {
+          intro: "Bạn đã hoàn thành hướng dẫn. Bây giờ bạn có thể bắt đầu tạo tài khoản mới. Nếu cần trợ giúp, hãy nhấn vào nút 'Hướng dẫn sử dụng'."
+        }
+      ];
     }
 
     else if (pageType === 'ghichu_chitiet') {

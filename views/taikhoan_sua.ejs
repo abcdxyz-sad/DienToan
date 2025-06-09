@@ -213,23 +213,20 @@
 							</div>
 						</form>
 					</div>
-				</div>
-
-				<%- include('footer') %>
+				</div>			
 	</div>
-
-	<!-- Intro.js script -->
+	<%- include('footer') %>
 	<script>
-		document.querySelector("form").addEventListener("submit", function (e) {
+		const form = document.querySelector("form.needs-validation");
+		form.addEventListener("submit", function (e) {
 			const mk = document.getElementById("MatKhau").value;
 			const xnm = document.getElementById("XacNhanMatKhau").value;
 			if (mk && mk !== xnm) {
-				alert("Mật khẩu xác nhận không khớp!");
 				e.preventDefault();
+				alert("Mật khẩu xác nhận không khớp!");
 			}
 		});
 	</script>
-
 	<%- include('javascript') %>
 </body>
 

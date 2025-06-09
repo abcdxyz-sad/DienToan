@@ -13,6 +13,7 @@ router.get('/', async (req, res) => {
   res.render('index', {
     title: 'Trang chủ',
     ghichu: gc,
+    notFound: false,
     isLoggedIn: !!req.session.MaNguoiDung,
     pageType: 'trangchu'
   });
